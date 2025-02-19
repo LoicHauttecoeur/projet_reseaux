@@ -1,0 +1,16 @@
+# Ignorer tout ce qui est en dehors du projet
+../*
+
+# Ignorer fichiers système et configurations personnelles
+.bash_history
+.config/
+.gitconfig
+.viminfo
+.vscode/
+.rustup/
+.packettracer/
+.VirtualBox/
+.matplotlib/
+.ssh/
+OneDrive*/
+Cisco Packet Tracer*/

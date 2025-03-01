@@ -1,19 +1,22 @@
 import socket
 
-# Paramètres du serveur
 HOST = '127.0.0.1'
 PORT = 12345
 
-# Création du socket UDP
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-# Envoi d'un message
-message = "Hello, Serveur UDP!"
-client_socket.sendto(message.encode(), (HOST, PORT))
+try:
+    while True:
+        message = input("💬 Entrez un message (ou 'exit' pour quitter, 'shutdown' pour éteindre le serveur) : ")
+        if message.lower() in ['exit', 'shutdown']:
+            client_socket.sendto(message.encode(), (HOST, PORT))
+            break
+        client_socket.sendto(message.encode(), (HOST, PORT))
+        response, _ = client_socket.recvfrom(1024)
+        print(f"📩 Réponse du serveur : {response}")
 
-# Réception de la réponse
-response, _ = client_socket.recvfrom(1024)
-print(f"Réponse du serveur : {response.decode()}")
-
-# Fermeture du socket
-client_socket.close()
+except Exception as e:
+    print(f"⚠️ Erreur : {e}")
+finally:
+    client_socket.close()
+    print("🔴 Connexion fermée proprement.")
